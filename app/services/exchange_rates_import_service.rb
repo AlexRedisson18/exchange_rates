@@ -25,16 +25,6 @@ class ExchangeRatesImportService
     price.gsub(',', '.').to_f.round(2)
   end
 
-  # def days_offset
-  #   current_week_offset = Date.today.wday
-  #   minimal_days_count = 28
-  #   minimal_days_count + current_week_offset
-  # end
-
-  # def days_range
-  #   days_offset.days.ago.to_date..Date.today
-  # end
-
   # def percents
   #   # monday price
   #   a = 100.0

@@ -7,3 +7,9 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+ExchangeRate.destroy_all
+
+minimal_days_count = 28
+days_offset = minimal_days_count + (Date.today.wday - 1)
+days_range = days_offset.days.ago.to_date..Date.today
+ExchangeRatesImportService.new(days_range).call
