@@ -21,6 +21,10 @@ class ExchangeRatesImportService
     "https://www.cbr.ru/scripts/XML_daily.asp?date_req=#{formatted_date}"
   end
 
+  def round_price(price)
+    price.gsub(',', '.').to_f.round(2)
+  end
+
   # def days_offset
   #   current_week_offset = Date.today.wday
   #   minimal_days_count = 28
@@ -38,8 +42,4 @@ class ExchangeRatesImportService
   #   b = 150.0
   #   ((b - a) * 100 / a).round(2)
   # end
-
-  def round_price(price)
-    price.gsub(',', '.').to_f.round(2)
-  end
 end
