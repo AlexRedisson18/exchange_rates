@@ -18,6 +18,7 @@ gem 'whenever', require: false
 
 group :development, :test do
   gem 'debug', platforms: %i[mri windows]
+  gem 'pry'
 end
 
 group :development do

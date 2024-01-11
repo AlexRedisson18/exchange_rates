@@ -10,6 +10,8 @@
 ExchangeRate.destroy_all
 
 minimal_days_count = 28
-days_offset = minimal_days_count + (Date.today.wday - 1)
+current_week_day = Date.today.wday.zero? ? 7 : Date.today.wday
+days_offset = minimal_days_count + (current_week_day - 1)
 days_range = days_offset.days.ago.to_date..Date.today
+
 ExchangeRatesImportService.new(days_range).call

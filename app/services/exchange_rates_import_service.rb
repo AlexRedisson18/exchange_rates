@@ -24,12 +24,4 @@ class ExchangeRatesImportService
   def round_price(price)
     price.gsub(',', '.').to_f.round(2)
   end
-
-  # def percents
-  #   # monday price
-  #   a = 100.0
-  #   # sunday price
-  #   b = 150.0
-  #   ((b - a) * 100 / a).round(2)
-  # end
 end
