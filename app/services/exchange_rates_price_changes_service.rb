@@ -3,7 +3,6 @@ class ExchangeRatesPriceChangesService
 
   def call
     grouped_rates = group_rates_by_dates(exchange_rates)
-    binding.pry
     calculate_price_changes(grouped_rates)
   end
 
@@ -39,19 +38,31 @@ class ExchangeRatesPriceChangesService
   def calculate_price_changes(rates)
     result = {}
     ExchangeRate::CURRENCIES.map do |currency|
+      result[currency] = []
       monday_and_sunday_dates.map(&:to_s).each_slice(2) do |monday_date, sunday_date|
         monday_price = rates.dig(monday_date, currency)
         sunday_price = rates.dig(sunday_date, currency)
-        result[currency] = [] unless result[currency]
-        result[currency].push("#{sunday_price}₽(#{percentage_difference(monday_price, sunday_price)})")
+        result[currency].unshift(compare_price_changes(monday_price, sunday_price))
       end
     end
     result
   end
 
+  def compare_price_changes(monday_price, sunday_price)
+    return '-' if monday_price.nil? && sunday_price.nil?
+
+    if monday_price.nil?
+      "#{sunday_price}₽(0.0%)"
+    elsif sunday_price.nil?
+      "#{monday_price}₽(0.0%)"
+    else
+      "#{sunday_price}₽(#{percentage_difference(monday_price, sunday_price)})"
+    end
+  end
+
   def percentage_difference(monday_price, sunday_price)
     percent = ((sunday_price - monday_price) * 100 / monday_price).round(2)
-    return '0.0' if percent.zero?
+    return '0.0%' if percent.zero?
 
     percent *= -1
     percent.negative? ? "#{percent}%" : "+#{percent}%"

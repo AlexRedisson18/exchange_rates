@@ -1,0 +1,20 @@
+.price_changes_container {
+  margin: 20px;
+
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    border-top: 3px solid #dddddd;
+    border-bottom: 3px solid #dddddd;
+  }
+
+  th {
+    border-bottom: 3px solid #dddddd;
+  }
+
+  td, th {
+    text-align: center;
+    padding: 8px;
+  }
+}

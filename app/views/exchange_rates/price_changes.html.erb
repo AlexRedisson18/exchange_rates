@@ -1,0 +1,19 @@
+<div class="price_changes_container">
+  <table>
+    <tr>
+      <th>Валюта</th>
+      <th>4 недели назад</th>
+      <th>3 недели назад</th>
+      <th>Позапрошалая неделя</th>
+      <th>Прошлая неделя</th>
+    </tr>
+    <% @price_changes.each do |currency, prices| %>
+      <tr>
+        <td><%= currency %></td>
+        <% prices.each do |price| %>
+          <td><%= price %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>
