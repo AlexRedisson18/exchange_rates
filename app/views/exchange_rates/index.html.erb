@@ -1,1 +1,12 @@
-<div id="chart"></div>
+<div class="exchange_rates">
+  <%= link_to "Exchange rates price changes", price_changes_exchange_rates_path %>
+  <div id="chart"></div>
+  <script>
+    var chart = c3.generate({
+        bindto: '#chart',
+        data: {
+          columns: <%= @prices %>
+        }
+    });
+  </script>
+</div>

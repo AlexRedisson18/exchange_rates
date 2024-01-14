@@ -24,9 +24,7 @@ class ExchangeRatesPriceChangesService
 
   # find all dates for mondays and sundays for last 4 weeks
   def monday_and_sunday_dates
-    minimal_days_count = 28
-    current_week_day = Date.today.wday.zero? ? 7 : Date.today.wday
-    start_date = (minimal_days_count + (current_week_day - 1)).days.ago.to_date
+    start_date = (Date.today - 28.days).beginning_of_week
     end_date = start_date + 27.days
     sunday_and_monday_wdays = [0, 1]
 
