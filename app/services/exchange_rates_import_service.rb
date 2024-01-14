@@ -9,7 +9,7 @@ class ExchangeRatesImportService
       response['ValCurs']['Valute'].each do |elem|
         next unless ExchangeRate::CURRENCIES.include?(elem['CharCode'])
 
-        ExchangeRate.create(currency: elem['CharCode'], price: round_price(elem['Value']), date: date)
+        ExchangeRate.find_or_create_by(date: date, currency: elem['CharCode'], price: round_price(elem['Value']))
       end
     end
   end

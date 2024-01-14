@@ -22,6 +22,8 @@ class ExchangeRatesIndexService
   end
 
   def conver_prices_to_array(prices)
+    return [] if prices.empty?
+
     result = []
     prices.each_value { |value| result.push(value) }
     result.to_json.html_safe
